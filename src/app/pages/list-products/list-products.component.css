@@ -1,0 +1,121 @@
+:host{
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background-color: #f8f8f8; /* Light background */
+    color: #333;
+}
+
+/* Page Container */
+.product-page-container {
+	max-width: 1200px;
+	margin: 0 auto; /* Center the container */
+	background-color: #fff; /* White background for content area */
+	padding: 20px 30px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional subtle shadow */
+}
+
+/* Header Styling */
+.page-header h1 {
+	font-size: 1.8em;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.sub-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.9em;
+	color: #666;
+	margin-bottom: 25px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #eee; /* Separator line */
+}
+
+.sort-options label {
+	margin-right: 5px;
+}
+
+.sort-options select {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+}
+
+/* Product Grid Layout */
+.product-grid {
+	display: grid;
+	/* Create 3 columns, each taking equal space (1 fraction) */
+	grid-template-columns: repeat(3, 1fr);
+	/* Gap between grid items */
+	gap: 25px;
+}
+
+/* Product Card Styling */
+.product-card {
+	border: 1px solid #eee; /* Default light border */
+	padding: 15px;
+	text-align: center;
+	background-color: #fff;
+	border-radius: 4px;
+	transition: box-shadow 0.2s ease-in-out; /* Smooth transition for hover */
+}
+
+.product-card:hover {
+	 box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow on hover */
+}
+
+/* Highlight style for the first card (or any card with this class) */
+.product-card.highlight {
+	border: 1px solid #bbb; /* Slightly darker border for highlight */
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Optional subtle shadow for highlight */
+}
+
+
+.product-image {
+	max-width: 100%; /* Make image responsive */
+	height: auto;
+	margin-bottom: 15px;
+	aspect-ratio: 1 / 1; /* Make images square-ish, adjust if needed */
+	object-fit: contain; /* Ensure image fits without distortion */
+}
+
+.product-title {
+	font-size: 1em;
+	font-weight: 600;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.product-meta {
+	font-size: 0.8em;
+	color: #777;
+	margin-bottom: 10px;
+}
+
+.product-price {
+	font-size: 1em;
+	font-weight: bold;
+	color: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+	.product-grid {
+		grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+	}
+}
+
+@media (max-width: 600px) {
+	.product-grid {
+		grid-template-columns: 1fr; /* 1 column on very small screens */
+	}
+	.sub-header {
+		flex-direction: column; /* Stack results and sort on small screens */
+		align-items: flex-start;
+	}
+	.sort-options {
+		margin-top: 10px;
+	}
+}
