@@ -1,1 +1,21 @@
-<p>list-user works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button class="btn btn-primary">Ordenes</button>
+        <button class="btn btn-danger">Set inactive</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
