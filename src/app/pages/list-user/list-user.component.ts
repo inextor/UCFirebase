@@ -10,7 +10,7 @@ import { RestResponse } from '../../services/Rest';
   templateUrl: './list-user.component.html',
   styleUrl: './list-user.component.css'
 })
-export class ListUserComponent implements OnInit
+export class ListUserComponent extends implements OnInit
 {
     users: any[] = [];
 

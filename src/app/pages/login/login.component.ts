@@ -24,7 +24,7 @@ export class LoginComponent implements OnDestroy {
     };
     
     this.http
-      .post('https://trikitrakes.integranet.xyz/api/login.php', payload)
+      .post('https://uniformesprofesionales.integranet.xyz/api/login.php', payload)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {

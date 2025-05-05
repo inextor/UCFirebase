@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-list-products',
@@ -8,7 +9,7 @@ import { PageHeaderComponent } from '../../components/page-header/page-header.co
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
-export class ListProductsComponent implements OnInit
+export class ListProductsComponent extends BaseComponent implements OnInit
 {
     item_info_list:any[] = [];
 
