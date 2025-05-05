@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { CommonModule } from '@angular/common';
-import { Rest } from '../../services/Rest';
+import { RestResponse } from '../../services/Rest';
 
 @Component({
   selector: 'app-list-user',
@@ -10,7 +10,8 @@ import { Rest } from '../../services/Rest';
   templateUrl: './list-user.component.html',
   styleUrl: './list-user.component.css'
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent implements OnInit
+{
     users: any[] = [];
 
     constructor(private restService: RestService)
