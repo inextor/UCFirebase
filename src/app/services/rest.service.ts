@@ -29,9 +29,3 @@ export class RestService {
         return this.initRestSimple<any>('user').getAll();
     }
 }
-
-	public initRestSimple<T>(path: string):Rest<T, T>
-	{
-		return this.initRest<T, T>(path);
-	}
-}

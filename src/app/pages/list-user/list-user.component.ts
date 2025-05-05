@@ -12,14 +12,22 @@ import { CommonModule } from '@angular/common';
 export class ListUserComponent implements OnInit {
     users: any[] = [];
 
-    constructor(private restService: RestService) { }
+    constructor(private restService: RestService)
+    { 
 
-    ngOnInit(): void {
+    }
+
+    ngOnInit(): void 
+    {
         this.getUsers();
     }
 
-    getUsers(): void {
-        this.restService.getUsers().subscribe((response: RestResponse<any>) => {
+    getUsers(): void 
+    {
+        this.restService.initRestSimple('user')
+        .getAll()
+        .subscribe((response: RestResponse<any>) =>
+        {
             this.users = response.data;
         });
     }
