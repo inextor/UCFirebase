@@ -36,8 +36,6 @@ export class BaseComponent implements OnInit, OnDestroy
 
 	constructor(public rest: RestService, public confirmation:ConfirmationService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title)
 	{
-		if( window.document.body.clientWidth < 1200 )
-			this.rest.hideMenu();
 	}
 
 	ngOnInit() { }
@@ -126,7 +124,7 @@ export class BaseComponent implements OnInit, OnDestroy
 			{
 				let v = params.get('search_extra.'+i ) === 'null' ? null : params.get('search_extra.'+i);
 
-				if( /^\d{4}-\d{2}-\d{2}(T|\s)\d{2}:\d{2}:\d{2}/.test( v ) )
+				if(v && /^\d{4}-\d{2}-\d{2}(T|\s)\d{2}:\d{2}:\d{2}/.test( v ) )
 				{
 					let components = v.split(/T|-|:|\s/g);
 					let utcTime = Date.UTC
@@ -168,7 +166,7 @@ export class BaseComponent implements OnInit, OnDestroy
 		return first_observable
 		.pipe
 		(
-			mergeMap((response)=>
+			mergeMap((response:RestResponse<T>)=>
 			{
 				let observables = [ of(response) ];
 				let pages_needed = Math.ceil( response.total/SEARCH_LIMIT );
@@ -284,18 +282,20 @@ export class BaseComponent implements OnInit, OnDestroy
 				});
 			});
 
-			if( param_map.has('sort_order') )
-			{
-				item_search.sort_order = param_map.get('sort_order').split(',');
-			}
+			let sort_order = param_map.get('sort_order');
+			item_search.sort_order = sort_order == null ? [] : sort_order.split(',');
+
 		}
+
 
 		let page_str:string | null = qpm.get('page');
 		item_search.page = page_str ? parseInt( page_str ) as number : 0;
 		item_search.limit = this.page_size;
 
-		if( item_search.page == NaN )
+		if( Number.isNaN(item_search.page) )
+		{
 			item_search.page = 0;
+		}
 
 		return item_search as SearchObject<T>;
 	}
@@ -311,7 +311,7 @@ export class BaseComponent implements OnInit, OnDestroy
 			{
 				let v = param_map.get('search_extra.'+i ) === 'null' ? null : param_map.get('search_extra.'+i);
 
-				if( i.includes('timestamp') || i.includes('system') )
+				if( v &&( i.includes('timestamp') || i.includes('system') )  )
 				{
 					if( /^\d{4}-\d{2}-\d{2}(T|\s)\d{2}:\d{2}:\d{2}/.test( v ) )
 					{
@@ -376,7 +376,7 @@ export class BaseComponent implements OnInit, OnDestroy
 						if( f.includes('timestamp') || f.includes('system') )
 						{
 							let value = param_map.get(field);
-							if( /^\d{4}-\d{2}-\d{2}(T|\s)\d{2}:\d{2}:\d{2}/.test( value ) )
+							if(value && /^\d{4}-\d{2}-\d{2}(T|\s)\d{2}:\d{2}:\d{2}/.test( value ) )
 							{
 								item_search[k][f] = Utils.getDateFromUTCMysqlString( value );
 							}
@@ -420,17 +420,18 @@ export class BaseComponent implements OnInit, OnDestroy
 			});
 		});
 
-		if( param_map.has('sort_order') )
-		{
-			item_search.sort_order = param_map.get('sort_order').split(',');
-		}
+
+		let sort_order = param_map.get('sort_order');
+		item_search.sort_order = sort_order == null ? [] : sort_order.split(',');
 
 		let page_str:string | null = param_map.get('page');
 		item_search.page = page_str ? parseInt( page_str ) as number : 0;
 		item_search.limit = this.page_size;
 
-		if( item_search.page == NaN )
+		if( Number.isNaN( item_search.page ) )
+		{
 			item_search.page = 0;
+		}
 
 		return item_search as SearchObject<T>;
 	}

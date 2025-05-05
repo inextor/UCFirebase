@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { CommonModule } from '@angular/common';
 import { RestResponse } from '../../services/Rest';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-list-user',
@@ -10,23 +11,18 @@ import { RestResponse } from '../../services/Rest';
   templateUrl: './list-user.component.html',
   styleUrl: './list-user.component.css'
 })
-export class ListUserComponent extends implements OnInit
+export class ListUserComponent extends BaseComponent implements OnInit
 {
     users: any[] = [];
 
-    constructor(private restService: RestService)
-    {
-
-    }
-
-    ngOnInit(): void
+    override ngOnInit(): void
     {
         this.getUsers();
     }
 
     getUsers(): void
     {
-        this.restService.initRestSimple('user')
+        this.rest.initRestSimple('user')
         .getAll()
         .subscribe((response: RestResponse<any>) =>
         {

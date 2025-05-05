@@ -1,12 +1,32 @@
 import { Injectable } from '@angular/core';
 import { DomainConfiguration, Rest, RestResponse, CsvArray, CsvNumberArray } from './Rest';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ErrorMessage, Utils } from '../classes/Utils';
 
 @Injectable({
     providedIn: 'root'
 })
-export class RestService {
+export class RestService
+{
+	public error_behavior_subject = new BehaviorSubject<ErrorMessage>(new ErrorMessage('',''));
+
+	showError(error: any, auto_hide:boolean = true)
+	{
+		console.log('Error to display is', error);
+		if( error instanceof ErrorMessage )
+		{
+			this.showErrorMessage(error);
+			return;
+		}
+		let str_error = Utils.getErrorString(error);
+		this.showErrorMessage(new ErrorMessage(str_error, 'alert-danger', auto_hide));
+	}
+
+	showErrorMessage(error: ErrorMessage)
+	{
+		this.error_behavior_subject.next(error);
+	}
 
     domain_configuration: DomainConfiguration = {
         domain: 'https://uniformesprofesionales.integranet.xyz'

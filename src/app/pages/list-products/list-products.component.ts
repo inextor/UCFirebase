@@ -4,27 +4,27 @@ import { PageHeaderComponent } from '../../components/page-header/page-header.co
 import { BaseComponent } from '../base/base.component';
 
 @Component({
-  selector: 'app-list-products',
+	selector: 'app-list-products',
 	imports: [CommonModule, PageHeaderComponent],
-  templateUrl: './list-products.component.html',
-  styleUrl: './list-products.component.css'
+	templateUrl: './list-products.component.html',
+	styleUrl: './list-products.component.css'
 })
 export class ListProductsComponent extends BaseComponent implements OnInit
 {
-    item_info_list:any[] = [];
+	item_info_list:any[] = [];
 
-		ngOnInit(): void
+	override ngOnInit(): void
+	{
+
+		fetch('https://uniformesprofesionales.integranet.xyz/api/item_info.php?limit=20')
+		.then((response)=>
 		{
-
-			fetch('https://uniformesprofesionales.integranet.xyz/api/item_info.php?limit=20')
-			.then((response)=>
-			{
-				return response.json();
-			})
-			.then((response)=>
-			{
-				this.item_info_list = response.data;
-			});
-}
+			return response.json();
+		})
+		.then((response)=>
+		{
+			this.item_info_list = response.data;
+		});
+	}
 }
 
