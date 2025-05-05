@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 
 @Component({
   selector: 'app-list-products',
-	imports: [CommonModule],
+	imports: [CommonModule, PageHeaderComponent],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
