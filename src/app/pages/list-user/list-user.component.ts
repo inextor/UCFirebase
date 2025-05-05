@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService, RestResponse } from '../../services/rest.service';
+import { RestService } from '../../services/rest.service';
 import { CommonModule } from '@angular/common';
+import { Rest } from '../../services/Rest';
 
 @Component({
   selector: 'app-list-user',
@@ -13,16 +14,16 @@ export class ListUserComponent implements OnInit {
     users: any[] = [];
 
     constructor(private restService: RestService)
-    { 
+    {
 
     }
 
-    ngOnInit(): void 
+    ngOnInit(): void
     {
         this.getUsers();
     }
 
-    getUsers(): void 
+    getUsers(): void
     {
         this.restService.initRestSimple('user')
         .getAll()
